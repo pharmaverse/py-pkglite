@@ -1,0 +1,17 @@
+py-pkglite uses third-party Python packages which may be distributed under
+different licenses. We have listed all of these third party packages and
+their licenses below. However, the most up-to-date information can be found
+via inspecting the dependencies field in the pyproject.toml file.
+
+You must agree to the terms of these licenses, in addition to the py-pkglite
+source code license, in order to use this software.
+
+--------------------------------------------------
+Third party Python packages listed by license type
+[Format: Name - URL]
+--------------------------------------------------
+
+MIT License (https://opensource.org/license/mit)
+  * gitignore-parser - https://github.com/mherrmann/gitignore_parser/blob/master/LICENSE
+  * rich - https://github.com/Textualize/rich/blob/master/LICENSE
+  * typer - https://github.com/fastapi/typer/blob/master/LICENSE
