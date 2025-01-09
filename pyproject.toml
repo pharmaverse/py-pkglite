@@ -37,7 +37,7 @@ requires-python = ">= 3.10"
 pkglite = "pkglite.main:app"
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling==1.26.3"]
 build-backend = "hatchling.build"
 
 [tool.hatch.metadata]
@@ -45,3 +45,16 @@ allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pkglite"]
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "ruff>=0.8.6",
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["tests"]
+addopts = "-v --cov=pkglite --cov-report html"
