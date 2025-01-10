@@ -28,11 +28,17 @@ def load_ignore_matcher(directory: str) -> Callable[[str], bool]:
     abs_dir = os.path.abspath(os.path.expanduser(directory))
     ignore_path = os.path.join(abs_dir, ".pkgliteignore")
 
-    return (
-        parse_gitignore(ignore_path)
-        if os.path.exists(ignore_path)
-        else lambda path: False
-    )
+    if not os.path.exists(ignore_path):
+        return lambda path: False
+
+    base_matcher = parse_gitignore(ignore_path)
+
+    def normalized_matcher(path: str) -> bool:
+        abs_path = os.path.abspath(os.path.expanduser(path))
+        normalized_path = abs_path.replace(os.sep, "/")
+        return base_matcher(normalized_path)
+
+    return normalized_matcher
 
 
 def get_package_name(directory: str) -> str:
@@ -94,7 +100,9 @@ def read_binary_content(file_path: str) -> str:
     """
     with open(file_path, "rb") as f:
         content = f.read().hex()
-        return "".join(f"  {content[i:i + 128]}\n" for i in range(0, len(content), 128))
+        return "".join(
+            f"  {content[i : i + 128]}\n" for i in range(0, len(content), 128)
+        )
 
 
 def read_file_content(file_path: str, file_type: str) -> str:
