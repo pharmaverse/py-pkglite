@@ -94,7 +94,9 @@ def read_binary_content(file_path: str) -> str:
     """
     with open(file_path, "rb") as f:
         content = f.read().hex()
-        return "".join(f"  {content[i:i + 128]}\n" for i in range(0, len(content), 128))
+        return "".join(
+            f"  {content[i : i + 128]}\n" for i in range(0, len(content), 128)
+        )
 
 
 def read_file_content(file_path: str, file_type: str) -> str:
