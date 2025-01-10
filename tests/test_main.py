@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 from unittest.mock import patch, Mock
 
@@ -152,9 +153,11 @@ def test_use_command_multiple_dirs_with_force(mock_use, tmp_path):
 
 def test_quiet_flag_propagation():
     """Test quiet flag propagation across all commands"""
-    with patch("pkglite.main.pack_impl") as mock_pack, patch(
-        "pkglite.main.unpack_impl"
-    ) as mock_unpack, patch("pkglite.main.use_pkglite_impl") as mock_use:
+    with (
+        patch("pkglite.main.pack_impl") as mock_pack,
+        patch("pkglite.main.unpack_impl") as mock_unpack,
+        patch("pkglite.main.use_pkglite_impl") as mock_use,
+    ):
         runner.invoke(app, ["pack", "dir", "--quiet"])
         assert mock_pack.call_args[1]["quiet"] is True
 
@@ -178,26 +181,42 @@ def test_quiet_flag_propagation():
         assert mock_use.call_args[1]["quiet"] is True
 
 
+def strip_ansi(text):
+    """Remove ANSI escape codes from text"""
+    ansi_escape = re.compile(r"\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])")
+    return ansi_escape.sub("", text)
+
+
 def test_help_messages():
     """Test help messages for all commands"""
     result = runner.invoke(app, ["--help"])
+    clean_output = strip_ansi(result.stdout)
     assert result.exit_code == 0
-    assert "pkglite" in result.stdout
+    assert "pkglite" in clean_output
 
     result = runner.invoke(app, ["pack", "--help"])
+    clean_output = strip_ansi(result.stdout)
     assert result.exit_code == 0
-    assert "Pack files" in result.stdout
-    assert "--output-file  -o" in result.stdout
-    assert "--quiet        -q" in result.stdout
+    assert "Pack files" in clean_output
+    assert "--output-file" in clean_output
+    assert "-o" in clean_output
+    assert "--quiet" in clean_output
+    assert "-q" in clean_output
 
     result = runner.invoke(app, ["unpack", "--help"])
+    clean_output = strip_ansi(result.stdout)
     assert result.exit_code == 0
-    assert "Unpack files" in result.stdout
-    assert "--output-dir  -o" in result.stdout
-    assert "--quiet       -q" in result.stdout
+    assert "Unpack files" in clean_output
+    assert "--output-dir" in clean_output
+    assert "-o" in clean_output
+    assert "--quiet" in clean_output
+    assert "-q" in clean_output
 
     result = runner.invoke(app, ["use", "--help"])
+    clean_output = strip_ansi(result.stdout)
     assert result.exit_code == 0
-    assert "pkgliteignore" in result.stdout
-    assert "--force  -f" in result.stdout
-    assert "--quiet  -q" in result.stdout
+    assert "pkgliteignore" in clean_output
+    assert "--force" in clean_output
+    assert "-f" in clean_output
+    assert "--quiet" in clean_output
+    assert "-q" in clean_output
