@@ -55,5 +55,5 @@ def test_load_ignore_matcher(tmp_path):
     matcher = load_ignore_matcher(str(test_dir))
 
     assert matcher(str(test_dir / "test.pyc")) is True
-    assert matcher(str(test_dir / "__pycache__/module.py")) is True
+    assert matcher(str(test_dir / "__pycache__" / "module.py")) is True
     assert matcher(str(test_dir / ".git/")) is False
