@@ -85,7 +85,7 @@ unpack(txt, output_dir="path/to/output")
 
 ## Why pkglite for Python?
 
-Building on our experience with [r-pkglite](https://cran.r-project.org/package=pkglite),
+Building on our experience with pkglite for R,
 we identified several limitations and unmet needs:
 
 - **Broader scope**: Extend support for packing and unpacking packages
@@ -96,7 +96,7 @@ we identified several limitations and unmet needs:
   provide a command-line interface (CLI) to better integrate with
   standard engineering workflows.
 
-We made a few key design changes from r-pkglite to implement the above goals:
+We made a few key design changes from pkglite for R to implement the above goals:
 
 - Introduced a `.pkgliteignore` configuration file to control packing scope,
   following the gitignore standard.
