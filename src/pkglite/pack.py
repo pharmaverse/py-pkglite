@@ -28,17 +28,11 @@ def load_ignore_matcher(directory: str) -> Callable[[str], bool]:
     abs_dir = os.path.abspath(os.path.expanduser(directory))
     ignore_path = os.path.join(abs_dir, ".pkgliteignore")
 
-    if not os.path.exists(ignore_path):
-        return lambda path: False
-
-    base_matcher = parse_gitignore(ignore_path)
-
-    def normalized_matcher(path: str) -> bool:
-        abs_path = os.path.abspath(os.path.expanduser(path))
-        normalized_path = abs_path.replace(os.sep, "/")
-        return base_matcher(normalized_path)
-
-    return normalized_matcher
+    return (
+        parse_gitignore(ignore_path)
+        if os.path.exists(ignore_path)
+        else lambda path: False
+    )
 
 
 def get_package_name(directory: str) -> str:
