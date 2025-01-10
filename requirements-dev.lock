@@ -14,8 +14,6 @@ click==8.1.8
     # via typer
 coverage==7.6.10
     # via pytest-cov
-exceptiongroup==1.2.2
-    # via pytest
 gitignore-parser==0.1.11
     # via pkglite
 iniconfig==2.0.0
@@ -36,14 +34,10 @@ pytest-cov==6.0.0
 rich==13.9.4
     # via pkglite
     # via typer
-ruff==0.8.6
+ruff==0.9.0
 shellingham==1.5.4
     # via typer
-tomli==2.2.1
-    # via coverage
-    # via pytest
 typer==0.15.1
     # via pkglite
 typing-extensions==4.12.2
-    # via rich
     # via typer
