@@ -10,9 +10,26 @@
     --md-accent-fg-color--transparent: hsla(220, 76%, 61%, 0.1);
     --md-accent-bg-color: hsla(0, 0%, 100%, 1);
     --md-accent-bg-color--light: hsla(0, 0%, 100%, 0.7);
+    --md-text-font: "Invention";
 }
 
 /* Typography */
+
+@font-face {
+    font-display: swap;
+    font-family: "Invention";
+    src: url("../assets/InventionVF_W_Wght.woff2") format("woff2");
+    font-weight: 300 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Invention";
+    src: url("../assets/InventionVF_Italics_W_Wght.woff2") format("woff2");
+    font-weight: 300 700;
+    font-style: italic;
+}
 
 body {
     -webkit-font-smoothing: auto;
