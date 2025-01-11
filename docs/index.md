@@ -25,7 +25,9 @@ To install the command line tool globally,
 
 ## Usage
 
-- [Get started](articles/get-started.md)
+Check out the [getting
+started](https://pharmaverse.github.io/py-pkglite/articles/get-started/)
+article for the CLI and Python API usage.
 
 ## Why pkglite for Python?
 
