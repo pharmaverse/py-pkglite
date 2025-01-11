@@ -12,7 +12,7 @@ and restoring them into the original directory structure.
 You can install pkglite for Python from PyPI:
 
 ```bash
-pip3 install pkglite
+pip install pkglite
 ```
 
 Or install the development version from GitHub:
