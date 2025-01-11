@@ -23,6 +23,7 @@ sync_article() {
 
     # Clean up
     rm "docs/articles/$article_name.ipynb"
+    rm "docs/articles/$article_name.quarto_ipynb"
 
     # Format .py using ruff from venv
     python -m ruff format "$example_output"
