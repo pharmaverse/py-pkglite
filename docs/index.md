@@ -1,4 +1,4 @@
-# pkglite for Python <img src="docs/assets/logo.png" align="right" width="120" />
+# pkglite for Python <img src="assets/logo.png" align="right" width="120" />
 
 A simple framework and command line interface for packing source packages
 written in any programming language into a text file

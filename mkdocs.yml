@@ -1,0 +1,82 @@
+site_name: pkglite for Python
+site_url: https://pharmaverse.github.io/py-pkglite/
+
+repo_url: https://github.com/pharmaverse/py-pkglite
+repo_name: pharmaverse/py-pkglite
+edit_uri: edit/main/docs/
+
+nav:
+  - Home: index.md
+  - Articles:
+    - articles/get-started.md
+  - API Reference:
+    - Pack: reference/pack.md
+    - Unpack: reference/unpack.md
+    - Use: reference/use.md
+    - Classify: reference/classify.md
+  - Changelog: changelog.md
+
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          paths: [src]
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.tasklist:
+      custom_checkbox: false
+  - tables
+  - toc:
+      permalink: true
+
+theme:
+  name: material
+  font:
+    code: JetBrains Mono
+  logo: assets/logo.png
+  favicon: assets/favicon.png
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+  - announce.dismiss
+  - content.action.edit
+  - content.action.view
+  - content.code.annotate
+  - content.code.copy
+  - content.tooltips
+  - navigation.footer
+  - navigation.indexes
+  - navigation.sections
+  - navigation.expand
+  - navigation.top
+  - navigation.path
+  - search.highlight
+  - search.suggest
+  - toc.follow

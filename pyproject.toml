@@ -53,6 +53,11 @@ dev-dependencies = [
     "ruff>=0.8.6",
     "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.5.49",
+    "mkdocstrings-python>=1.13.0",
+    "nbconvert>=7.16.5",
+    "jupyter>=1.1.1",
 ]
 
 [tool.pytest.ini_options]
