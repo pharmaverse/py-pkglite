@@ -11,6 +11,7 @@
     --md-accent-bg-color: hsla(0, 0%, 100%, 1);
     --md-accent-bg-color--light: hsla(0, 0%, 100%, 0.7);
     --md-text-font: "Invention";
+    --md-code-font: "IBM Plex Mono";
 }
 
 /* Typography */
@@ -28,6 +29,22 @@
     font-family: "Invention";
     src: url("../assets/InventionVF_Italics_W_Wght.woff2") format("woff2");
     font-weight: 300 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "IBM Plex Mono";
+    src: url("../assets/IBMPlexMono-Text.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "IBM Plex Mono";
+    src: url("../assets/IBMPlexMono-TextItalic.woff2") format("woff2");
+    font-weight: 400;
     font-style: italic;
 }
 
