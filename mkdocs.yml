@@ -41,6 +41,8 @@ markdown_extensions:
 
 theme:
   name: material
+  font:
+    text: Lato
   logo: assets/logo.png
   favicon: assets/favicon.png
   icon:
