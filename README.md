@@ -1,5 +1,8 @@
 # pkglite for Python <img src="docs/assets/logo.png" align="right" width="120" />
 
+[![CI Tests](https://github.com/pharmaverse/py-pkglite/actions/workflows/ci-tests.yml/badge.svg)](https://github.com/nanxstats/pkglite/actions/workflows/ci-tests.yml)
+[![mkdocs](https://github.com/pharmaverse/py-pkglite/actions/workflows/mkdocs.yml/badge.svg)](https://nanx.me/pkglite/)
+
 A simple framework and command line interface for packing source packages
 written in any programming language into a text file
 and restoring them into the original directory structure.
