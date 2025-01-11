@@ -34,6 +34,13 @@ classifiers = [
 
 requires-python = ">= 3.10"
 
+[project.urls]
+Homepage = "https://pharmaverse.github.io/py-pkglite/"
+Documentation = "https://pharmaverse.github.io/py-pkglite/"
+Repository = "https://github.com/pharmaverse/py-pkglite"
+Issues = "https://github.com/pharmaverse/py-pkglite/issues"
+Changelog = "https://github.com/pharmaverse/py-pkglite/blob/main/CHANGELOG.md"
+
 [project.scripts]
 pkglite = "pkglite.main:app"
 
