@@ -9,6 +9,7 @@ nav:
   - Home: index.md
   - Articles:
     - articles/get-started.md
+    - articles/design.md
   - API Reference:
     - Pack: reference/pack.md
     - Unpack: reference/unpack.md
