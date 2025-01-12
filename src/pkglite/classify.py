@@ -1,8 +1,8 @@
 import os
-from typing import FrozenSet, Optional
+from typing import FrozenSet
 
 
-def is_text_file(path: str, n: Optional[int] = None) -> bool:
+def is_text_file(path: str, n: int | None = None) -> bool:
     """
     Classify any file as text or binary.
 

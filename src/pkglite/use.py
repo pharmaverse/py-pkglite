@@ -2,14 +2,14 @@ import os
 import shutil
 import importlib.resources as pkg_resources
 from pathlib import Path
-from typing import List, Union, Tuple
+from typing import List, Tuple
 
 import pkglite.templates
 from .cli import print_success, print_warning, format_path
 
 
 def process_directory(
-    template: Path, directory: Union[str, Path], force: bool, quiet: bool
+    template: Path, directory: str | Path, force: bool, quiet: bool
 ) -> Tuple[str, bool]:
     """
     Process a single directory and create/overwrite `.pkgliteignore` file.
@@ -50,9 +50,7 @@ def process_directory(
 
 
 def use_pkglite(
-    input_dirs: Union[str, Path, List[Union[str, Path]]],
-    force: bool = False,
-    quiet: bool = False,
+    input_dirs: str | Path | list[str | Path], force: bool = False, quiet: bool = False
 ) -> List[str]:
     """
     Copy the `.pkgliteignore` template into one or more directories.
