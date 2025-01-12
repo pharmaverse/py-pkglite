@@ -50,10 +50,7 @@ def load_ignore_matcher(directory: str) -> Callable[[str], bool]:
         if os.path.isabs(path):
             path = os.path.relpath(path, abs_dir)
 
-        # Convert Windows path separators to forward slashes
-        norm_path = path.replace(os.sep, "/")
-
-        return spec.match_file(norm_path)
+        return spec.match_file(path)
 
     return matcher
 
