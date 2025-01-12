@@ -101,7 +101,7 @@ def read_text_content(file_path: str) -> str:
     Returns:
         str: Formatted text content.
     """
-    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+    with open(file_path, "r", encoding="utf-8") as f:
         return "".join("  " + line for line in f)
 
 
@@ -205,7 +205,7 @@ def pack(
 
     os.makedirs(os.path.dirname(abs_output), exist_ok=True)
 
-    with open(abs_output, "w") as out:
+    with open(abs_output, "w", encoding="utf-8") as out:
         out.write(create_header())
 
         for directory in abs_dirs:
