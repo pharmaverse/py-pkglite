@@ -1,7 +1,3 @@
-from pathlib import Path
-
-import pytest
-
 from pkglite.unpack import unpack, parse_packed_file
 
 
