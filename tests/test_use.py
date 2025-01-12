@@ -1,7 +1,3 @@
-from pathlib import Path
-
-import pytest
-
 from pkglite.use import use_pkglite
 
 

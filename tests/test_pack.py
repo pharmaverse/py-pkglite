@@ -1,7 +1,3 @@
-from pathlib import Path
-
-import pytest
-
 from pkglite.pack import pack, load_ignore_matcher
 
 
