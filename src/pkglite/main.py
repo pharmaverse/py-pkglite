@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List, Annotated
+from typing import Annotated
 
 import typer
 
@@ -19,7 +19,7 @@ def callback():
 
 @app.command()
 def pack(
-    input_dirs: List[Path],
+    input_dirs: list[Path],
     output_file: Annotated[Path, typer.Option("--output-file", "-o")] = Path(
         "pkglite.txt"
     ),
@@ -55,7 +55,7 @@ def unpack(
 
 @app.command()
 def use(
-    input_dirs: List[Path],
+    input_dirs: list[Path],
     force: Annotated[bool, typer.Option("--force", "-f")] = False,
     quiet: Annotated[bool, typer.Option("--quiet", "-q")] = False,
 ):

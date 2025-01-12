@@ -2,7 +2,7 @@ import os
 import shutil
 import importlib.resources as pkg_resources
 from pathlib import Path
-from typing import List, Tuple
+from typing import Tuple
 
 import pkglite.templates
 from .cli import print_success, print_warning, format_path
@@ -15,18 +15,13 @@ def process_directory(
     Process a single directory and create/overwrite `.pkgliteignore` file.
 
     Args:
-        template (Path): Path to the template `.pkgliteignore` file to copy from.
-        directory (str or Path): Path to the directory to process.
-        force (bool): If True, overwrite existing `.pkgliteignore` file.
-        quiet (bool): If True, suppress output messages.
+        template: Path to the template `.pkgliteignore` file to copy from.
+        directory: Path to the directory to process.
+        force: If True, overwrite existing `.pkgliteignore` file.
+        quiet: If True, suppress output messages.
 
     Returns:
-        Tuple[str, bool]: A tuple containing:
-            - str: Path to the `.pkgliteignore` file.
-            - bool: Whether the file was created/overwritten.
-
-    Raises:
-        OSError: If there are permission errors creating directory or copying file.
+        A tuple containing the path to the `.pkgliteignore` file and whether it was created/overwritten.
     """
     dir_path = Path(os.path.abspath(os.path.expanduser(str(directory))))
     ignore_path = str(dir_path / ".pkgliteignore")
@@ -51,18 +46,17 @@ def process_directory(
 
 def use_pkglite(
     input_dirs: str | Path | list[str | Path], force: bool = False, quiet: bool = False
-) -> List[str]:
+) -> list[str]:
     """
     Copy the `.pkgliteignore` template into one or more directories.
 
     Args:
-        input_dirs (str or Path or list): Path or list of paths to directories
-            where `.pkgliteignore` should be placed.
-        force (bool): If True, overwrite existing `.pkgliteignore` files. Default is False.
-        quiet (bool): If True, suppress output messages. Default is False.
+        input_dirs: Path or sequence of paths to directories for `.pkgliteignore`.
+        force: If True, overwrite existing `.pkgliteignore` files.
+        quiet: If True, suppress output messages.
 
     Returns:
-        list: Paths to the newly created or existing `.pkgliteignore` files.
+        Paths to the newly created or existing `.pkgliteignore` files.
     """
     dirs = [input_dirs] if isinstance(input_dirs, (str, Path)) else input_dirs
 
