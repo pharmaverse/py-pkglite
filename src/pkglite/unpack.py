@@ -1,6 +1,6 @@
 import os
 import binascii
-from typing import List, Dict, Set, Optional
+from typing import List, Dict, Set
 from pathlib import Path
 from dataclasses import dataclass
 
@@ -21,7 +21,7 @@ class FileData:
     content: str
 
 
-def extract_metadata_field(line: str, tag: str) -> Optional[str]:
+def extract_metadata_field(line: str, tag: str) -> str | None:
     """
     Extract a metadata field value from a line with a given tag.
 
@@ -30,7 +30,7 @@ def extract_metadata_field(line: str, tag: str) -> Optional[str]:
         tag (str): The tag to look for.
 
     Returns:
-        Optional[str]: The extracted value if found, None otherwise.
+        str | None: The extracted value if found, None otherwise.
     """
     return line.split(f"{tag}: ")[1] if line.startswith(f"{tag}: ") else None
 
@@ -81,7 +81,17 @@ def parse_packed_file(input_file: str) -> List[FileData]:
 
     def process_file_entry(
         current: Dict[str, str], lines: List[str]
-    ) -> Optional[FileData]:
+    ) -> FileData | None:
+        """
+        Process a file entry and create a FileData object.
+
+        Args:
+            current: Dictionary containing current file metadata.
+            lines: List of content lines.
+
+        Returns:
+            FileData | None: FileData object if valid entry, None otherwise.
+        """
         if not (current and "package" in current and "path" in current):
             return None
         content = create_file_entry(

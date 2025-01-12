@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from typing import List, Callable, Tuple, Optional
+from typing import Callable
 
 from pathspec import PathSpec
 
@@ -142,7 +142,7 @@ def process_single_file(
     directory: str,
     package_name: str,
     ignore_matcher: Callable[[str], bool],
-) -> Optional[str]:
+) -> str | None:
     """
     Process a single file and return its formatted content.
 
@@ -153,7 +153,7 @@ def process_single_file(
         ignore_matcher (function): Function to check if file should be ignored.
 
     Returns:
-        Optional[str]: Formatted file content if not ignored, None otherwise.
+        str | None: Formatted file content if not ignored, None otherwise.
     """
     if ignore_matcher(file_path):
         return None
@@ -182,7 +182,7 @@ def create_header() -> str:
 
 
 def pack(
-    input_dirs: str | List[str] | Path,
+    input_dirs: str | Path | list[str | Path],
     output_file: str | Path = Path("pkglite.txt"),
     quiet: bool = False,
 ) -> None:
@@ -190,7 +190,7 @@ def pack(
     Pack files from one or multiple directories into a text file.
 
     Args:
-        input_dirs (str or list or Path): Path or list of paths to the
+        input_dirs (str or Path or list): Path or list of paths to the
             directories to pack.
         output_file (str or Path): Path to the output file.
             Default is 'pkglite.txt'.
