@@ -31,7 +31,7 @@ def load_ignore_matcher(directory: str) -> Callable[[str], bool]:
     if not os.path.exists(ignore_path):
         return lambda path: False
 
-    with open(ignore_path, "r") as f:
+    with open(ignore_path, "r", encoding="utf-8") as f:
         patterns = f.readlines()
 
     spec = PathSpec.from_lines("gitwildmatch", patterns)
