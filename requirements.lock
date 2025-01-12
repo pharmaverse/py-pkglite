@@ -12,12 +12,12 @@
 -e file:.
 click==8.1.8
     # via typer
-gitignore-parser==0.1.11
-    # via pkglite
 markdown-it-py==3.0.0
     # via rich
 mdurl==0.1.2
     # via markdown-it-py
+pathspec==0.12.1
+    # via pkglite
 pygments==2.19.1
     # via rich
 rich==13.9.4
