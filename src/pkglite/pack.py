@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from typing import List, Callable, Tuple, Optional
 
-from gitignore_parser import parse_gitignore
+from pathspec import PathSpec
 
 from .classify import classify_file
 from .cli import (
@@ -28,11 +28,31 @@ def load_ignore_matcher(directory: str) -> Callable[[str], bool]:
     abs_dir = os.path.abspath(os.path.expanduser(directory))
     ignore_path = os.path.join(abs_dir, ".pkgliteignore")
 
-    return (
-        parse_gitignore(ignore_path)
-        if os.path.exists(ignore_path)
-        else lambda path: False
-    )
+    if not os.path.exists(ignore_path):
+        return lambda path: False
+
+    with open(ignore_path, "r", encoding="utf-8") as f:
+        patterns = f.readlines()
+
+    spec = PathSpec.from_lines("gitwildmatch", patterns)
+
+    def matcher(path: str) -> bool:
+        """
+        Check if a path matches any ignore pattern.
+
+        Args:
+            path (str): Path to check against ignore patterns.
+                Should be relative to the base directory.
+
+        Returns:
+            bool: True if path should be ignored, False otherwise.
+        """
+        if os.path.isabs(path):
+            path = os.path.relpath(path, abs_dir)
+
+        return spec.match_file(path)
+
+    return matcher
 
 
 def get_package_name(directory: str) -> str:
@@ -78,7 +98,7 @@ def read_text_content(file_path: str) -> str:
     Returns:
         str: Formatted text content.
     """
-    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+    with open(file_path, "r", encoding="utf-8") as f:
         return "".join("  " + line for line in f)
 
 
@@ -182,7 +202,7 @@ def pack(
 
     os.makedirs(os.path.dirname(abs_output), exist_ok=True)
 
-    with open(abs_output, "w") as out:
+    with open(abs_output, "w", encoding="utf-8") as out:
         out.write(create_header())
 
         for directory in abs_dirs:

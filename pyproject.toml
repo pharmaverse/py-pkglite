@@ -6,7 +6,7 @@ authors = [
     { name = "Nan Xiao", email = "nan.xiao1@msd.com" }
 ]
 dependencies = [
-    "gitignore-parser>=0.1.11",
+    "pathspec>=0.12.1",
     "rich>=13.9.4",
     "typer>=0.12.5",
 ]

@@ -99,7 +99,7 @@ def parse_packed_file(input_file: str) -> List[FileData]:
     content_lines: List[str] = []
     in_content = False
 
-    with open(input_file, "r") as f:
+    with open(input_file, "r", encoding="utf-8") as f:
         for line in f:
             line = line.rstrip()
 

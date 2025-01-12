@@ -12,6 +12,8 @@ Third party Python packages listed by license type
 --------------------------------------------------
 
 MIT License (https://opensource.org/license/mit)
-  * gitignore-parser - https://github.com/mherrmann/gitignore_parser/blob/master/LICENSE
   * rich - https://github.com/Textualize/rich/blob/master/LICENSE
   * typer - https://github.com/fastapi/typer/blob/master/LICENSE
+
+Mozilla Public License 2.0 (https://opensource.org/license/mpl-2-0)
+  * pathspec - https://github.com/cpburnz/python-pathspec/blob/master/LICENSE
