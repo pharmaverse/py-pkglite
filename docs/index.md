@@ -1,4 +1,4 @@
-# pkglite for Python <img src="docs/assets/logo.png" align="right" width="120" />
+# pkglite for Python <img src="assets/logo.png" align="right" width="120" />
 
 [![PyPI version](https://img.shields.io/pypi/v/pkglite)](https://pypi.org/project/pkglite/)
 ![Python versions](https://img.shields.io/pypi/pyversions/pkglite)

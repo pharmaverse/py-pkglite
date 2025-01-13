@@ -1,8 +1,9 @@
 import os
 from pathlib import Path
-from typing import List, Callable, Tuple, Optional
+from collections.abc import Callable
+from typing import Protocol
 
-from gitignore_parser import parse_gitignore
+from pathspec import PathSpec
 
 from .classify import classify_file
 from .cli import (
@@ -14,25 +15,48 @@ from .cli import (
 )
 
 
-def load_ignore_matcher(directory: str) -> Callable[[str], bool]:
+class PathMatcher(Protocol):
+    def __call__(self, path: str) -> bool: ...
+
+
+def load_ignore_matcher(directory: str) -> PathMatcher:
     """
     Load ignore patterns from a `.pkgliteignore` file in the directory.
 
     Args:
-        directory (str): Path to the directory to pack.
+        directory: Path to the directory to pack.
 
     Returns:
-        function: A matcher function that returns True if a path
-        should be ignored, False otherwise.
+        A matcher function that returns True if a path should be ignored.
     """
     abs_dir = os.path.abspath(os.path.expanduser(directory))
     ignore_path = os.path.join(abs_dir, ".pkgliteignore")
 
-    return (
-        parse_gitignore(ignore_path)
-        if os.path.exists(ignore_path)
-        else lambda path: False
-    )
+    if not os.path.exists(ignore_path):
+        return lambda path: False
+
+    with open(ignore_path, "r", encoding="utf-8") as f:
+        patterns = f.readlines()
+
+    spec = PathSpec.from_lines("gitwildmatch", patterns)
+
+    def matcher(path: str) -> bool:
+        """
+        Check if a path matches any ignore pattern.
+
+        Args:
+            path: Path to check against ignore patterns.
+                Should be relative to the base directory.
+
+        Returns:
+            True if path should be ignored, False otherwise.
+        """
+        if os.path.isabs(path):
+            path = os.path.relpath(path, abs_dir)
+
+        return spec.match_file(path)
+
+    return matcher
 
 
 def get_package_name(directory: str) -> str:
@@ -40,10 +64,10 @@ def get_package_name(directory: str) -> str:
     Derive the package name from the directory name.
 
     Args:
-        directory (str): Path to the directory.
+        directory: Path to the directory.
 
     Returns:
-        str: The base name of the directory path.
+        The base name of the directory path.
     """
     return os.path.basename(os.path.normpath(directory))
 
@@ -53,12 +77,12 @@ def create_file_metadata(package_name: str, relative_path: str, file_type: str) 
     Create file metadata string.
 
     Args:
-        package_name (str): Name of the package.
-        relative_path (str): Relative path of the file within the package.
-        file_type (str): Type of the file ('text' or 'binary').
+        package_name: Name of the package.
+        relative_path: Relative path of the file within the package.
+        file_type: Type of the file ('text' or 'binary').
 
     Returns:
-        str: Formatted metadata string.
+        Formatted metadata string.
     """
     return (
         f"Package: {package_name}\n"
@@ -73,12 +97,12 @@ def read_text_content(file_path: str) -> str:
     Read text file content and format it.
 
     Args:
-        file_path (str): Path to the text file to read from.
+        file_path: Path to the text file to read from.
 
     Returns:
-        str: Formatted text content.
+        Formatted text content.
     """
-    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+    with open(file_path, "r", encoding="utf-8") as f:
         return "".join("  " + line for line in f)
 
 
@@ -87,14 +111,16 @@ def read_binary_content(file_path: str) -> str:
     Read binary file content and format it in hex format.
 
     Args:
-        file_path (str): Path to the binary file to read from.
+        file_path: Path to the binary file to read from.
 
     Returns:
-        str: Formatted binary content.
+        Formatted binary content.
     """
     with open(file_path, "rb") as f:
         content = f.read().hex()
-        return "".join(f"  {content[i:i + 128]}\n" for i in range(0, len(content), 128))
+        return "".join(
+            f"  {content[i : i + 128]}\n" for i in range(0, len(content), 128)
+        )
 
 
 def read_file_content(file_path: str, file_type: str) -> str:
@@ -102,11 +128,11 @@ def read_file_content(file_path: str, file_type: str) -> str:
     Read and format file content based on type.
 
     Args:
-        file_path (str): Path to the file to read from.
-        file_type (str): Type of the file ('text' or 'binary').
+        file_path: Path to the file to read from.
+        file_type: Type of the file ('text' or 'binary').
 
     Returns:
-        str: Formatted file content.
+        Formatted file content.
     """
     return (
         read_text_content(file_path)
@@ -120,18 +146,18 @@ def process_single_file(
     directory: str,
     package_name: str,
     ignore_matcher: Callable[[str], bool],
-) -> Optional[str]:
+) -> str | None:
     """
     Process a single file and return its formatted content.
 
     Args:
-        file_path (str): Path to the file to process.
-        directory (str): Base directory path.
-        package_name (str): Name of the package.
-        ignore_matcher (function): Function to check if file should be ignored.
+        file_path: Path to the file to process.
+        directory: Base directory path.
+        package_name: Name of the package.
+        ignore_matcher: Function to check if file should be ignored.
 
     Returns:
-        Optional[str]: Formatted file content if not ignored, None otherwise.
+        Formatted file content if not ignored, None otherwise.
     """
     if ignore_matcher(file_path):
         return None
@@ -151,7 +177,7 @@ def create_header() -> str:
     Create the pkglite header string.
 
     Returns:
-        str: Formatted header string.
+        Formatted header string.
     """
     return (
         "# Generated by py-pkglite: do not edit by hand\n"
@@ -160,7 +186,7 @@ def create_header() -> str:
 
 
 def pack(
-    input_dirs: str | List[str] | Path,
+    input_dirs: str | Path | list[str | Path],
     output_file: str | Path = Path("pkglite.txt"),
     quiet: bool = False,
 ) -> None:
@@ -168,11 +194,9 @@ def pack(
     Pack files from one or multiple directories into a text file.
 
     Args:
-        input_dirs (str or list or Path): Path or list of paths to the
-            directories to pack.
-        output_file (str or Path): Path to the output file.
-            Default is 'pkglite.txt'.
-        quiet (bool): If True, suppress output messages. Default False.
+        input_dirs: Path or sequence of paths to the directories to pack.
+        output_file: Path to the output file. Default is 'pkglite.txt'.
+        quiet: If True, suppress output messages.
     """
     dirs = [input_dirs] if isinstance(input_dirs, (str, Path)) else input_dirs
     abs_dirs = [os.path.abspath(os.path.expanduser(str(d))) for d in dirs]
@@ -180,7 +204,7 @@ def pack(
 
     os.makedirs(os.path.dirname(abs_output), exist_ok=True)
 
-    with open(abs_output, "w") as out:
+    with open(abs_output, "w", encoding="utf-8") as out:
         out.write(create_header())
 
         for directory in abs_dirs:

@@ -1,12 +1,12 @@
 [project]
 name = "pkglite"
 version = "0.1.0"
-description = "pkglite for Python"
+description = "A simple framework for packing source packages written in any programming language into a text file and restoring them into the original directory structure"
 authors = [
     { name = "Nan Xiao", email = "nan.xiao1@msd.com" }
 ]
 dependencies = [
-    "gitignore-parser>=0.1.11",
+    "pathspec>=0.12.1",
     "rich>=13.9.4",
     "typer>=0.12.5",
 ]
@@ -29,15 +29,23 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
 ]
 
 requires-python = ">= 3.10"
+
+[project.urls]
+Homepage = "https://pharmaverse.github.io/py-pkglite/"
+Documentation = "https://pharmaverse.github.io/py-pkglite/"
+Repository = "https://github.com/pharmaverse/py-pkglite"
+Issues = "https://github.com/pharmaverse/py-pkglite/issues"
+Changelog = "https://github.com/pharmaverse/py-pkglite/blob/main/CHANGELOG.md"
 
 [project.scripts]
 pkglite = "pkglite.main:app"
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling==1.26.3"]
 build-backend = "hatchling.build"
 
 [tool.hatch.metadata]
@@ -45,3 +53,21 @@ allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pkglite"]
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "ruff>=0.8.6",
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.5.49",
+    "mkdocstrings-python>=1.13.0",
+    "nbconvert>=7.16.5",
+    "jupyter>=1.1.1",
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["tests"]
+addopts = "-v --cov=pkglite --cov-report html"
