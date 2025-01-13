@@ -1,7 +1,7 @@
 [project]
 name = "pkglite"
 version = "0.1.0"
-description = "pkglite for Python"
+description = "A simple framework for packing source packages written in any programming language into a text file and restoring them into the original directory structure"
 authors = [
     { name = "Nan Xiao", email = "nan.xiao1@msd.com" }
 ]
