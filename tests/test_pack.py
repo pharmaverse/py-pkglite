@@ -1,4 +1,4 @@
-from pkglite.pack import pack, load_ignore_matcher
+from pkglite.pack import load_ignore_matcher, pack
 
 
 def test_pack_single_directory(tmp_path):
