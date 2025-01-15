@@ -1,15 +1,16 @@
-import os
 import binascii
+import os
 from collections.abc import Sequence
-from pathlib import Path
 from dataclasses import dataclass
+from enum import Enum, auto
+from pathlib import Path
 
 from .cli import (
+    format_count,
+    format_path,
     print_action,
     print_sub_action,
     print_success,
-    format_path,
-    format_count,
 )
 
 
@@ -68,9 +69,17 @@ def process_content_line(line: str) -> str:
     return line[2:] if line.startswith("  ") else ""
 
 
+class ParserState(Enum):
+    """States for the packed file parser state machine."""
+
+    EXPECTING_PACKAGE = auto()  # Initial state, expecting Package: line
+    EXPECTING_METADATA = auto()  # Expecting File: or Format: or Content:
+    READING_CONTENT = auto()  # Reading content lines
+
+
 def parse_packed_file(input_file: str) -> Sequence[FileData]:
     """
-    Parse the packed text file and extract file data.
+    Parse the packed text file and extract file data using a finite state machine.
 
     Args:
         input_file: Path to the packed file.
@@ -104,43 +113,78 @@ def parse_packed_file(input_file: str) -> Sequence[FileData]:
             content=content["content"],
         )
 
+    def handle_package_state(line: str) -> tuple[ParserState, dict[str, str] | None]:
+        """Handle EXPECTING_PACKAGE state."""
+        if package_name := extract_metadata_field(line, "Package"):
+            return ParserState.EXPECTING_METADATA, {"package": package_name}
+        return ParserState.EXPECTING_PACKAGE, None
+
+    def handle_metadata_state(
+        line: str, current: dict[str, str]
+    ) -> tuple[ParserState, bool]:
+        """Handle EXPECTING_METADATA state. Returns (new_state, metadata_updated)."""
+        if path := extract_metadata_field(line, "File"):
+            current["path"] = path
+            return ParserState.EXPECTING_METADATA, True
+
+        if file_format := extract_metadata_field(line, "Format"):
+            current["format"] = file_format
+            return ParserState.EXPECTING_METADATA, True
+
+        if line == "Content:":
+            return ParserState.READING_CONTENT, True
+
+        return ParserState.EXPECTING_METADATA, False
+
+    def finalize_current_entry(
+        current: dict[str, str], content_lines: list[str]
+    ) -> FileData | None:
+        """Create FileData from current entry if valid."""
+        if file_data := process_file_entry(current, content_lines):
+            return file_data
+        return None
+
     files: list[FileData] = []
     current_file: dict[str, str] = {}
     content_lines: list[str] = []
-    in_content = False
+    state = ParserState.EXPECTING_PACKAGE
 
     with open(input_file, "r", encoding="utf-8") as f:
         for line in f:
             line = line.rstrip()
 
-            package_name = extract_metadata_field(line, "Package")
-            if package_name:
+            if state == ParserState.EXPECTING_PACKAGE:
+                # Handle transition from current package to new package
                 if current_file:
-                    if file_data := process_file_entry(current_file, content_lines):
+                    if file_data := finalize_current_entry(current_file, content_lines):
                         files.append(file_data)
-                current_file = {"package": package_name}
-                content_lines = []
-                in_content = False
-                continue
 
-            if not in_content:
-                path = extract_metadata_field(line, "File")
-                if path:
-                    current_file["path"] = path
-                    continue
+                new_state, new_file = handle_package_state(line)
+                if new_file:
+                    current_file = new_file
+                    content_lines = []
+                    state = new_state
 
-                file_format = extract_metadata_field(line, "Format")
-                if file_format:
-                    current_file["format"] = file_format
-                    continue
+            elif state == ParserState.EXPECTING_METADATA:
+                new_state, updated = handle_metadata_state(line, current_file)
+                if updated:
+                    state = new_state
 
-                if line == "Content:":
-                    in_content = True
-                    continue
-            else:
-                content_lines.append(process_content_line(line))
+            elif state == ParserState.READING_CONTENT:
+                if package_name := extract_metadata_field(line, "Package"):
+                    # New package found while reading content
+                    if file_data := finalize_current_entry(current_file, content_lines):
+                        files.append(file_data)
+                    current_file = {"package": package_name}
+                    content_lines = []
+                    state = ParserState.EXPECTING_METADATA
+                else:
+                    content_lines.append(process_content_line(line))
 
-        if file_data := process_file_entry(current_file, content_lines):
+        # Handle the last file entry
+        if current_file and (
+            file_data := finalize_current_entry(current_file, content_lines)
+        ):
             files.append(file_data)
 
     return files

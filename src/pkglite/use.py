@@ -1,11 +1,12 @@
+import importlib.resources as pkg_resources
 import os
 import shutil
-import importlib.resources as pkg_resources
 from pathlib import Path
 from typing import Tuple
 
 import pkglite.templates
-from .cli import print_success, print_warning, format_path
+
+from .cli import format_path, print_success, print_warning
 
 
 def process_directory(

@@ -1,17 +1,17 @@
 import os
-from pathlib import Path
 from collections.abc import Callable
+from pathlib import Path
 from typing import Protocol
 
 from pathspec import PathSpec
 
 from .classify import classify_file
 from .cli import (
+    format_count,
+    format_path,
     print_action,
     print_sub_action,
     print_success,
-    format_path,
-    format_count,
 )
 
 
