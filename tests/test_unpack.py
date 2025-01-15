@@ -1,4 +1,4 @@
-from pkglite.unpack import unpack, parse_packed_file
+from pkglite.unpack import parse_packed_file, unpack
 
 
 def test_unpack_text_files(tmp_path):

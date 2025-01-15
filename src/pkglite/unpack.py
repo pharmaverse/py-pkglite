@@ -1,15 +1,15 @@
-import os
 import binascii
+import os
 from collections.abc import Sequence
-from pathlib import Path
 from dataclasses import dataclass
+from pathlib import Path
 
 from .cli import (
+    format_count,
+    format_path,
     print_action,
     print_sub_action,
     print_success,
-    format_path,
-    format_count,
 )
 
 
