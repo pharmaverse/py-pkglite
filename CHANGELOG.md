@@ -1,5 +1,12 @@
 # Changelog
 
+## py-pkglite 0.1.1
+
+### Improvements
+
+- Rewrite packed file parser with finite state machines to improve code readability (#16).
+- Use isort to sort import statements for all Python files (#15).
+
 ## py-pkglite 0.1.0
 
 ### Typing
