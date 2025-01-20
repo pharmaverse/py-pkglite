@@ -240,7 +240,7 @@ pluggy==1.5.0
     # via pytest
 prometheus-client==0.21.1
     # via jupyter-server
-prompt-toolkit==3.0.48
+prompt-toolkit==3.0.50
     # via ipython
     # via jupyter-console
 psutil==6.1.1
