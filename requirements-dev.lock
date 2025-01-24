@@ -61,7 +61,7 @@ decorator==5.1.1
     # via ipython
 defusedxml==0.7.1
     # via nbconvert
-executing==2.1.0
+executing==2.2.0
     # via stack-data
 fastjsonschema==2.21.1
     # via nbformat
@@ -258,7 +258,7 @@ pygments==2.19.1
     # via mkdocs-material
     # via nbconvert
     # via rich
-pymdown-extensions==10.14
+pymdown-extensions==10.14.1
     # via mkdocs-material
     # via mkdocstrings
 pytest==8.3.4
@@ -304,7 +304,7 @@ rich==13.9.4
 rpds-py==0.22.3
     # via jsonschema
     # via referencing
-ruff==0.9.2
+ruff==0.9.3
 send2trash==1.8.3
     # via jupyter-server
 setuptools==75.8.0
