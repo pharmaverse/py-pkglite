@@ -16,10 +16,10 @@ sync_article() {
     python -m nbconvert --to python "docs/articles/$article_name.ipynb" --output "../../$example_output"
 
     # Remove all comments
-    awk '!/^#/' "$example_output" > temp && mv temp "$example_output"
+    awk '!/^#/' "$example_output" >temp && mv temp "$example_output"
 
     # Consolidate consecutive blank lines into a single blank line
-    awk 'NF {p = 0} !NF {p++} p < 2' "$example_output" > temp && mv temp "$example_output"
+    awk 'NF {p = 0} !NF {p++} p < 2' "$example_output" >temp && mv temp "$example_output"
 
     # Clean up
     rm "docs/articles/$article_name.ipynb"
@@ -35,7 +35,7 @@ for article in get-started; do
 done
 
 # Sync README.md with modified image path for docs/index.md
-awk '{gsub("docs/assets/logo.png", "assets/logo.png"); print}' README.md > docs/index.md
+awk '{gsub("docs/assets/logo.png", "assets/logo.png"); print}' README.md >docs/index.md
 
 # Sync CHANGELOG.md with docs/changelog.md
 cp CHANGELOG.md docs/changelog.md
