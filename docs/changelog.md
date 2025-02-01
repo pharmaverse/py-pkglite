@@ -1,5 +1,13 @@
 # Changelog
 
+## py-pkglite 0.1.2
+
+### Documentation
+
+- Use absolute URL to replace relative path for the logo image in `README.md`,
+  to make it render properly on PyPI (#20).
+- Improve logo and favicon images generation workflow for better font rendering (#22).
+
 ## py-pkglite 0.1.1
 
 ### Improvements
