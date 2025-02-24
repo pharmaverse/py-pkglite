@@ -1,5 +1,11 @@
 # Changelog
 
+## py-pkglite 0.1.3
+
+### Maintenance
+
+- Manage project with uv (#24).
+
 ## py-pkglite 0.1.2
 
 ### Documentation
