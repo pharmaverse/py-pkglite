@@ -1,0 +1,14 @@
+<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style type="text/css">
+      @font-face {
+        font-family: "Invention";
+        src: url("https://r4csr.org/site_libs/bootstrap/fonts/InventionVF_W_Wght.woff2") format("woff2");
+        font-weight: 300 700;
+        font-style: normal;
+      }
+    </style>
+  </defs>
+  <text x="50%" y="50%" font-family="Invention" font-size="19" font-weight="300" fill="#FFFFFF" text-anchor="middle"
+    dominant-baseline="middle">py-pkglite</text>
+</svg>
