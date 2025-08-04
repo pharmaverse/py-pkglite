@@ -4,7 +4,6 @@
 ![Python versions](https://img.shields.io/pypi/pyversions/pkglite)
 [![CI Tests](https://github.com/pharmaverse/py-pkglite/actions/workflows/ci-tests.yml/badge.svg)](https://github.com/pharmaverse/py-pkglite/actions/workflows/ci-tests.yml)
 [![mkdocs](https://github.com/pharmaverse/py-pkglite/actions/workflows/mkdocs.yml/badge.svg)](https://pharmaverse.github.io/py-pkglite/)
-[![PyPI Downloads](https://img.shields.io/pypi/dm/pkglite)](https://pypistats.org/packages/pkglite)
 ![License](https://img.shields.io/pypi/l/pkglite)
 
 A simple framework for packing source packages written in any programming
