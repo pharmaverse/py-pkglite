@@ -1,5 +1,14 @@
 # Changelog
 
+## py-pkglite 0.1.4
+
+### Maintenance
+
+- Removed download statistics badge from `README.md` due to availability issues
+  with the service (#28).
+- Update documentation code font to improve readability (#29, #30).
+- Use Python 3.13.7 for the default package development environment (#31).
+
 ## py-pkglite 0.1.3
 
 ### Maintenance
