@@ -1,5 +1,5 @@
 import os
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from pathlib import Path
 from typing import Protocol
 
@@ -186,7 +186,7 @@ def create_header() -> str:
 
 
 def pack(
-    input_dirs: str | Path | list[str | Path],
+    input_dirs: str | Path | Sequence[str | Path],
     output_file: str | Path = Path("pkglite.txt"),
     quiet: bool = False,
 ) -> None:
