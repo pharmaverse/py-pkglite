@@ -1,5 +1,19 @@
 # Changelog
 
+## py-pkglite 0.1.5
+
+### Typing
+
+- Add mypy as a development dependency and resolve all mypy type checking issues (#34).
+
+### Maintenance
+
+- Add a GitHub Actions workflow to run mypy checks (#35).
+
+### Documentation
+
+- Shorten and improve clarity of the package description (#36).
+
 ## py-pkglite 0.1.4
 
 ### Maintenance
