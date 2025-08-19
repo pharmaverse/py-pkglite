@@ -1,6 +1,7 @@
 import importlib.resources as pkg_resources
 import os
 import shutil
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Tuple
 
@@ -46,7 +47,9 @@ def process_directory(
 
 
 def use_pkglite(
-    input_dirs: str | Path | list[str | Path], force: bool = False, quiet: bool = False
+    input_dirs: str | Path | Sequence[str | Path],
+    force: bool = False,
+    quiet: bool = False,
 ) -> list[str]:
     """
     Copy the `.pkgliteignore` template into one or more directories.

@@ -6,10 +6,10 @@
 [![mkdocs](https://github.com/pharmaverse/py-pkglite/actions/workflows/mkdocs.yml/badge.svg)](https://pharmaverse.github.io/py-pkglite/)
 ![License](https://img.shields.io/pypi/l/pkglite)
 
-A simple framework for packing source packages written in any programming
-language into a text file and restoring them into the original directory structure.
+A simple framework for packing source projects of any language into portable
+text files and restoring them into the original directory structure.
 
-Beisdes the Python API, a command line interface is also provided.
+Besides the Python API, a command line interface is also provided.
 
 ## Installation
 
