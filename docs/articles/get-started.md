@@ -1,21 +1,10 @@
 # Get started
 
-
-<!-- `.md` and `.py` files are generated from the `.qmd` file. Please edit that file. -->
-
-!!! tip
-
-    To run the code from this article as a Python script:
-
-    ```bash
-    python3 examples/get-started.py
-    ```
-
 ## Python API
 
 Import pkglite:
 
-``` python
+```python
 import pkglite as pkg
 ```
 
@@ -23,7 +12,7 @@ import pkglite as pkg
 
 Pack a single directory into a text file and unpack it:
 
-``` python
+```python
 dirs = ["path/to/pkg"]
 txt = "path/to/pkg.txt"
 pkg.use_pkglite(dirs)
@@ -35,7 +24,7 @@ pkg.unpack(txt, output_dir="path/to/output")
 
 Pack multiple directories into a text file and unpack it:
 
-``` python
+```python
 dirs = ["path/to/pkg1", "path/to/pkg2"]
 txt = "path/to/pkgs.txt"
 pkg.use_pkglite(dirs)
@@ -43,8 +32,8 @@ pkg.pack(dirs, output_file=txt)
 pkg.unpack(txt, output_dir="path/to/output")
 ```
 
-The `use_pkglite()` function creates a `.pkgliteignore` file to exclude
-files from the packing scope.
+The `use_pkglite()` function creates a `.pkgliteignore` file to exclude files
+from the packing scope.
 
 ## Command line interface
 
@@ -52,7 +41,7 @@ files from the packing scope.
 
 Pack a single directory into a text file and unpack it:
 
-``` bash
+```bash
 pkglite use path/to/pkg
 pkglite pack path/to/pkg -o path/to/pkg.txt
 pkglite unpack path/to/pkg.txt -o path/to/output
@@ -62,7 +51,7 @@ pkglite unpack path/to/pkg.txt -o path/to/output
 
 Pack multiple directories into a text file and unpack it:
 
-``` bash
+```bash
 pkglite use path/to/pkg1 path/to/pkg2
 pkglite pack path/to/pkg1 path/to/pkg2 -o path/to/pkgs.txt
 pkglite unpack path/to/pkgs.txt -o path/to/output
@@ -73,7 +62,7 @@ files from the packing scope.
 
 Run
 
-``` bash
+```bash
 pkglite --help
 pkglite use --help
 pkglite pack --help
