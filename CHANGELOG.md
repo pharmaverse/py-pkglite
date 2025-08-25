@@ -1,5 +1,13 @@
 # Changelog
 
+## py-pkglite 0.1.6
+
+### Documentation
+
+- Switched all articles to native Markdown and simplified the docs sync process;
+  removed `nbconvert` and `jupyter` from dev dependencies (#41).
+- Added mypy and pharmaverse badges to the README (#39, #43).
+
 ## py-pkglite 0.1.5
 
 ### Typing
