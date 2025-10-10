@@ -1,5 +1,15 @@
 # Changelog
 
+## py-pkglite 0.1.7
+
+### Maintenance
+
+- Added Python 3.14 support and set as default development environment (#47).
+- Updated GitHub Actions workflows to use the latest `checkout` and
+  `setup-python` versions (#47).
+- Refactored the logo generation script to use ImageMagick, removing the
+  previous R and hexSticker dependency (#46).
+
 ## py-pkglite 0.1.6
 
 ### Documentation
