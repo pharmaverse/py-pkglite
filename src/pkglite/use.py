@@ -3,7 +3,6 @@ import os
 import shutil
 from collections.abc import Sequence
 from pathlib import Path
-from typing import Tuple
 
 import pkglite.templates
 
@@ -12,7 +11,7 @@ from .cli import format_path, print_success, print_warning
 
 def process_directory(
     template: Path, directory: str | Path, force: bool, quiet: bool
-) -> Tuple[str, bool]:
+) -> tuple[str, bool]:
     """
     Process a single directory and create/overwrite `.pkgliteignore` file.
 

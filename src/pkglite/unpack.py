@@ -149,7 +149,7 @@ def parse_packed_file(input_file: str) -> Sequence[FileData]:
     content_lines: list[str] = []
     state = ParserState.EXPECTING_PACKAGE
 
-    with open(input_file, "r", encoding="utf-8") as f:
+    with open(input_file, encoding="utf-8") as f:
         for line in f:
             line = line.rstrip()
 

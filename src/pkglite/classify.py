@@ -1,5 +1,4 @@
 import os
-from typing import FrozenSet
 
 
 def is_text_file(path: str, n: int | None = None) -> bool:
@@ -16,8 +15,8 @@ def is_text_file(path: str, n: int | None = None) -> bool:
     Returns:
         True if the file is text, False if binary.
     """
-    ALLOW: FrozenSet[int] = frozenset([9, 10, 13] + list(range(32, 256)))
-    BLOCK: FrozenSet[int] = frozenset(list(range(0, 7)) + list(range(14, 32)))
+    ALLOW: frozenset[int] = frozenset([9, 10, 13] + list(range(32, 256)))
+    BLOCK: frozenset[int] = frozenset(list(range(0, 7)) + list(range(14, 32)))
 
     with open(path, "rb") as file:
         bytecode = bytes(file.read(n or os.path.getsize(path)))

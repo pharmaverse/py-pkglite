@@ -35,7 +35,7 @@ def load_ignore_matcher(directory: str) -> PathMatcher:
     if not os.path.exists(ignore_path):
         return lambda path: False
 
-    with open(ignore_path, "r", encoding="utf-8") as f:
+    with open(ignore_path, encoding="utf-8") as f:
         patterns = f.readlines()
 
     spec = PathSpec.from_lines("gitwildmatch", patterns)
@@ -102,7 +102,7 @@ def read_text_content(file_path: str) -> str:
     Returns:
         Formatted text content.
     """
-    with open(file_path, "r", encoding="utf-8") as f:
+    with open(file_path, encoding="utf-8") as f:
         return "".join("  " + line for line in f)
 
 
