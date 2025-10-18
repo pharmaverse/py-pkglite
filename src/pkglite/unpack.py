@@ -155,9 +155,10 @@ def parse_packed_file(input_file: str) -> Sequence[FileData]:
 
             if state == ParserState.EXPECTING_PACKAGE:
                 # Handle transition from current package to new package
-                if current_file:
-                    if file_data := finalize_current_entry(current_file, content_lines):
-                        files.append(file_data)
+                if current_file and (
+                    file_data := finalize_current_entry(current_file, content_lines)
+                ):
+                    files.append(file_data)
 
                 new_state, new_file = handle_package_state(line)
                 if new_file:
@@ -217,8 +218,10 @@ def write_binary_file(file_path: Path, content: str) -> None:
         binary_content = binascii.unhexlify(content)
         file_path.parent.mkdir(parents=True, exist_ok=True)
         file_path.write_bytes(binary_content)
-    except binascii.Error:
-        raise ValueError(f"Invalid hexadecimal content for binary file: {file_path}")
+    except binascii.Error as err:
+        raise ValueError(
+            f"Invalid hexadecimal content for binary file: {file_path}"
+        ) from err
 
 
 def write_file(file_data: FileData, output_directory: Path) -> None:
@@ -274,6 +277,8 @@ def unpack(
 
     if not quiet:
         print_success(
-            f"Unpacked {format_count(len(packages))} packages from "
-            f"{format_path(str(input_path), path_type='source')} into {format_path(str(output_path), path_type='target')}"
+            "Unpacked "
+            f"{format_count(len(packages))} packages from "
+            f"{format_path(str(input_path), path_type='source')} into "
+            f"{format_path(str(output_path), path_type='target')}"
         )

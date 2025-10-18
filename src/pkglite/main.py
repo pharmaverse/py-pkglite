@@ -13,7 +13,8 @@ app = typer.Typer()
 @app.callback()
 def callback():
     """
-    pkglite - Plain text representations for packages written in any programming language
+    pkglite - Plain text representations for packages written in any
+    programming language.
     """
 
 
