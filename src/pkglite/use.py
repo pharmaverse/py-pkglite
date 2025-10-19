@@ -3,7 +3,6 @@ import os
 import shutil
 from collections.abc import Sequence
 from pathlib import Path
-from typing import Tuple
 
 import pkglite.templates
 
@@ -12,7 +11,7 @@ from .cli import format_path, print_success, print_warning
 
 def process_directory(
     template: Path, directory: str | Path, force: bool, quiet: bool
-) -> Tuple[str, bool]:
+) -> tuple[str, bool]:
     """
     Process a single directory and create/overwrite `.pkgliteignore` file.
 
@@ -23,7 +22,8 @@ def process_directory(
         quiet: If True, suppress output messages.
 
     Returns:
-        A tuple containing the path to the `.pkgliteignore` file and whether it was created/overwritten.
+        A tuple containing the `.pkgliteignore` path and whether it was
+        created or overwritten.
     """
     dir_path = Path(os.path.abspath(os.path.expanduser(str(directory))))
     ignore_path = str(dir_path / ".pkgliteignore")
@@ -31,7 +31,9 @@ def process_directory(
     if os.path.exists(ignore_path) and not force:
         if not quiet:
             print_warning(
-                f"Skipping: {format_path('.pkgliteignore', path_type='target')} already exists in {format_path(str(dir_path), path_type='target')}"
+                "Skipping: "
+                f"{format_path('.pkgliteignore', path_type='target')} already exists "
+                f"in {format_path(str(dir_path), path_type='target')}"
             )
         return ignore_path, False
 
@@ -41,7 +43,9 @@ def process_directory(
     if not quiet:
         action = "Overwrote" if os.path.exists(ignore_path) and force else "Created"
         print_success(
-            f"{action} {format_path('.pkgliteignore', path_type='target')} in {format_path(str(dir_path), path_type='target')}"
+            f"{action} "
+            f"{format_path('.pkgliteignore', path_type='target')} in "
+            f"{format_path(str(dir_path), path_type='target')}"
         )
     return ignore_path, True
 

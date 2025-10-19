@@ -35,7 +35,7 @@ def load_ignore_matcher(directory: str) -> PathMatcher:
     if not os.path.exists(ignore_path):
         return lambda path: False
 
-    with open(ignore_path, "r", encoding="utf-8") as f:
+    with open(ignore_path, encoding="utf-8") as f:
         patterns = f.readlines()
 
     spec = PathSpec.from_lines("gitwildmatch", patterns)
@@ -102,7 +102,7 @@ def read_text_content(file_path: str) -> str:
     Returns:
         Formatted text content.
     """
-    with open(file_path, "r", encoding="utf-8") as f:
+    with open(file_path, encoding="utf-8") as f:
         return "".join("  " + line for line in f)
 
 
@@ -212,7 +212,7 @@ def pack(
             package_name = get_package_name(directory)
 
             all_files = [
-                (os.path.join(root, file), root, file)
+                os.path.join(root, file)
                 for root, _, files in os.walk(directory)
                 for file in files
                 if not ignore_matcher(os.path.join(root, file))
@@ -220,7 +220,7 @@ def pack(
 
             if not quiet:
                 print_action("Packing", package_name)
-                for file_path, root, file in all_files:
+                for file_path in all_files:
                     rel_path = os.path.relpath(file_path, directory)
                     print_sub_action("Reading", rel_path, path_type="source")
                     if content := process_single_file(
@@ -228,7 +228,7 @@ def pack(
                     ):
                         out.write(content)
             else:
-                for file_path, _, _ in all_files:
+                for file_path in all_files:
                     if content := process_single_file(
                         file_path, directory, package_name, ignore_matcher
                     ):
@@ -236,5 +236,7 @@ def pack(
 
     if not quiet:
         print_success(
-            f"Packed {format_count(len(abs_dirs))} packages into {format_path(abs_output, path_type='target')}"
+            "Packed "
+            f"{format_count(len(abs_dirs))} packages into "
+            f"{format_path(abs_output, path_type='target')}"
         )
