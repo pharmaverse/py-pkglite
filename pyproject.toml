@@ -1,6 +1,6 @@
 [project]
 name = "pkglite"
-version = "0.1.7"
+version = "0.1.8"
 description = "Pack and unpack source projects of any language into portable text files"
 authors = [
     { name = "Nan Xiao", email = "nan.xiao1@msd.com" }
