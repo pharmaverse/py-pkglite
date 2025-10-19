@@ -1,6 +1,6 @@
 [project]
 name = "pkglite"
-version = "0.1.7"
+version = "0.1.8"
 description = "Pack and unpack source projects of any language into portable text files"
 authors = [
     { name = "Nan Xiao", email = "nan.xiao1@msd.com" }
@@ -69,3 +69,19 @@ dev = [
 minversion = "6.0"
 testpaths = ["tests"]
 addopts = "-v --cov=pkglite --cov-report html"
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]

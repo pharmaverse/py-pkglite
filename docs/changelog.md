@@ -1,5 +1,15 @@
 # Changelog
 
+## py-pkglite 0.1.8
+
+### Linting
+
+- Added ruff linter configuration to `pyproject.toml` with popular rule sets
+  including pycodestyle, Pyflakes, pyupgrade, flake8-bugbear, flake8-simplify,
+  and isort (#50).
+- Fixed `ruff check` linting issues including UP006, UP015, UP035, F401, E501,
+  B007, B904, and SIM102 (#50).
+
 ## py-pkglite 0.1.7
 
 ### Maintenance
