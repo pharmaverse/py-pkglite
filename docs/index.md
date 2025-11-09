@@ -30,7 +30,18 @@ python3 -m pip install -e .
 ```
 
 To install the command line tool globally,
-[use pipx](https://packaging.python.org/en/latest/guides/installing-stand-alone-command-line-tools/).
+[use pipx](https://packaging.python.org/en/latest/guides/installing-stand-alone-command-line-tools/):
+
+```bash
+pipx install pkglite
+```
+
+You can also use `uvx` to [try the tool without installing
+it](https://docs.astral.sh/uv/guides/tools/):
+
+```bash
+uvx pkglite --help
+```
 
 ## Usage
 
