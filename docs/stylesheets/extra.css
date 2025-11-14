@@ -68,3 +68,8 @@ code {
 .md-typeset details {
     font-size: 0.85rem;
 }
+
+.md-banner {
+    color: var(--md-typeset-color);
+    background-color: oklch(96.2% 0.059 95.617);
+}
