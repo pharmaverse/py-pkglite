@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://pharmaverse.github.io/py-pkglite/</loc>
+         <lastmod>2025-11-30</lastmod>
+    </url>
+    <url>
+         <loc>https://pharmaverse.github.io/py-pkglite/changelog/</loc>
+         <lastmod>2025-11-30</lastmod>
+    </url>
+    <url>
+         <loc>https://pharmaverse.github.io/py-pkglite/articles/design/</loc>
+         <lastmod>2025-11-30</lastmod>
+    </url>
+    <url>
+         <loc>https://pharmaverse.github.io/py-pkglite/articles/get-started/</loc>
+         <lastmod>2025-11-30</lastmod>
+    </url>
+    <url>
+         <loc>https://pharmaverse.github.io/py-pkglite/reference/classify/</loc>
+         <lastmod>2025-11-30</lastmod>
+    </url>
+    <url>
+         <loc>https://pharmaverse.github.io/py-pkglite/reference/pack/</loc>
+         <lastmod>2025-11-30</lastmod>
+    </url>
+    <url>
+         <loc>https://pharmaverse.github.io/py-pkglite/reference/unpack/</loc>
+         <lastmod>2025-11-30</lastmod>
+    </url>
+    <url>
+         <loc>https://pharmaverse.github.io/py-pkglite/reference/use/</loc>
+         <lastmod>2025-11-30</lastmod>
+    </url>
+</urlset>
