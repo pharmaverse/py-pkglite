@@ -42,6 +42,7 @@ markdown_extensions:
 
 theme:
   name: material
+  custom_dir: docs/overrides
   font:
     text: Lato
   logo: assets/logo.png

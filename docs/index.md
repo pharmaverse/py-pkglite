@@ -3,8 +3,9 @@
 [![PyPI version](https://img.shields.io/pypi/v/pkglite)](https://pypi.org/project/pkglite/)
 ![Python versions](https://img.shields.io/pypi/pyversions/pkglite)
 [![pharmaverse py-pkglite badge](http://pharmaverse.org/shields/pkglite.svg)](https://pharmaverse.org)
-[![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
-[![CI Tests](https://github.com/pharmaverse/py-pkglite/actions/workflows/ci-tests.yml/badge.svg)](https://github.com/pharmaverse/py-pkglite/actions/workflows/ci-tests.yml)
+[![CI tests](https://github.com/pharmaverse/py-pkglite/actions/workflows/ci-tests.yml/badge.svg)](https://github.com/pharmaverse/py-pkglite/actions/workflows/ci-tests.yml)
+[![Mypy check](https://github.com/pharmaverse/py-pkglite/actions/workflows/mypy.yml/badge.svg)](https://github.com/pharmaverse/py-pkglite/actions/workflows/mypy.yml)
+[![Ruff check](https://github.com/pharmaverse/py-pkglite/actions/workflows/ruff-check.yml/badge.svg)](https://github.com/pharmaverse/py-pkglite/actions/workflows/ruff-check.yml)
 [![mkdocs](https://github.com/pharmaverse/py-pkglite/actions/workflows/mkdocs.yml/badge.svg)](https://pharmaverse.github.io/py-pkglite/)
 ![License](https://img.shields.io/pypi/l/pkglite)
 
@@ -30,7 +31,18 @@ python3 -m pip install -e .
 ```
 
 To install the command line tool globally,
-[use pipx](https://packaging.python.org/en/latest/guides/installing-stand-alone-command-line-tools/).
+[use pipx](https://packaging.python.org/en/latest/guides/installing-stand-alone-command-line-tools/):
+
+```bash
+pipx install pkglite
+```
+
+You can also use `uvx` to [try the tool without installing
+it](https://docs.astral.sh/uv/guides/tools/):
+
+```bash
+uvx pkglite --help
+```
 
 ## Usage
 
