@@ -3,8 +3,9 @@
 [![PyPI version](https://img.shields.io/pypi/v/pkglite)](https://pypi.org/project/pkglite/)
 ![Python versions](https://img.shields.io/pypi/pyversions/pkglite)
 [![pharmaverse py-pkglite badge](http://pharmaverse.org/shields/pkglite.svg)](https://pharmaverse.org)
-[![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
-[![CI Tests](https://github.com/pharmaverse/py-pkglite/actions/workflows/ci-tests.yml/badge.svg)](https://github.com/pharmaverse/py-pkglite/actions/workflows/ci-tests.yml)
+[![CI tests](https://github.com/pharmaverse/py-pkglite/actions/workflows/ci-tests.yml/badge.svg)](https://github.com/pharmaverse/py-pkglite/actions/workflows/ci-tests.yml)
+[![Mypy check](https://github.com/pharmaverse/py-pkglite/actions/workflows/mypy.yml/badge.svg)](https://github.com/pharmaverse/py-pkglite/actions/workflows/mypy.yml)
+[![Ruff check](https://github.com/pharmaverse/py-pkglite/actions/workflows/ruff-check.yml/badge.svg)](https://github.com/pharmaverse/py-pkglite/actions/workflows/ruff-check.yml)
 [![mkdocs](https://github.com/pharmaverse/py-pkglite/actions/workflows/mkdocs.yml/badge.svg)](https://pharmaverse.github.io/py-pkglite/)
 ![License](https://img.shields.io/pypi/l/pkglite)
 
