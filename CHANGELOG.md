@@ -1,5 +1,19 @@
 # Changelog
 
+## py-pkglite 0.1.9
+
+### Documentation
+
+- Improved installation instructions in `README.md` by adding explicit
+  `pipx` installation command and adding option to use `uvx` to try the
+  CLI tool without installing it (#53).
+
+### Maintenance
+
+- Added GitHub Actions workflow to run `ruff check` for code linting (#55).
+- Updated GitHub Actions workflows to use `actions/checkout@v6` (#55).
+- Updated badges in `README.md` (#55).
+
 ## py-pkglite 0.1.8
 
 ### Linting
