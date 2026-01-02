@@ -1,0 +1,94 @@
+[project]
+site_name = "pkglite for Python"
+site_description = "Pack and unpack source projects of any programming language into portable text files"
+site_author = "py-pkglite authors"
+site_url = "https://pharmaverse.github.io/py-pkglite/"
+repo_url = "https://github.com/pharmaverse/py-pkglite"
+repo_name = "pharmaverse/py-pkglite"
+edit_uri = "edit/main/docs/"
+copyright = """
+Copyright &copy; 2026 py-pkglite authors
+"""
+
+nav = [
+    { "Home" = "index.md" },
+    { "Articles" = [
+        "articles/get-started.md",
+        "articles/design.md",
+    ] },
+    { "API reference" = [
+        { "Pack" = "reference/pack.md" },
+        { "Unpack" = "reference/unpack.md" },
+        { "Use" = "reference/use.md" },
+        { "Classify" = "reference/classify.md" },
+    ] },
+    { "Changelog" = "changelog.md" },
+]
+
+extra_css = ["stylesheets/extra.css"]
+
+# ----------------------------------------------------------------------------
+# Section for configuring theme options
+# ----------------------------------------------------------------------------
+[project.theme]
+logo = "assets/logo.png"
+favicon = "assets/favicon.png"
+language = "en"
+font = false
+custom_dir = "docs/overrides"
+
+features = [
+    "announce.dismiss",
+    "content.action.edit",
+    "content.action.view",
+    "content.code.annotate",
+    "content.code.copy",
+    "content.code.select",
+    "content.footnote.tooltips",
+    "content.tabs.link",
+    "content.tooltips",
+    "header.autohide",
+    #"navigation.expand",
+    "navigation.footer",
+    "navigation.indexes",
+    "navigation.instant",
+    "navigation.instant.prefetch",
+    #"navigation.instant.progress",
+    "navigation.path",
+    #"navigation.prune",
+    "navigation.sections",
+    #"navigation.tabs",
+    #"navigation.tabs.sticky",
+    "navigation.top",
+    "navigation.tracking",
+    "search.highlight",
+    #"toc.follow",
+    #"toc.integrate",
+]
+
+[[project.theme.palette]]
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to light mode"
+
+[project.theme.icon]
+repo = "fontawesome/brands/github"
+
+# ----------------------------------------------------------------------------
+# Section for configuring mkdocstrings plugin
+# ----------------------------------------------------------------------------
+[project.plugins.mkdocstrings]
+default_handler = "python"
+
+[project.plugins.mkdocstrings.handlers.python]
+paths = ["src"]
+
+[project.plugins.mkdocstrings.handlers.python.options]
+inherited_members = true
+show_root_heading = true
+show_source = false

@@ -6,11 +6,11 @@
 [![CI tests](https://github.com/pharmaverse/py-pkglite/actions/workflows/ci-tests.yml/badge.svg)](https://github.com/pharmaverse/py-pkglite/actions/workflows/ci-tests.yml)
 [![Mypy check](https://github.com/pharmaverse/py-pkglite/actions/workflows/mypy.yml/badge.svg)](https://github.com/pharmaverse/py-pkglite/actions/workflows/mypy.yml)
 [![Ruff check](https://github.com/pharmaverse/py-pkglite/actions/workflows/ruff-check.yml/badge.svg)](https://github.com/pharmaverse/py-pkglite/actions/workflows/ruff-check.yml)
-[![mkdocs](https://github.com/pharmaverse/py-pkglite/actions/workflows/mkdocs.yml/badge.svg)](https://pharmaverse.github.io/py-pkglite/)
+[![Documentation](https://github.com/pharmaverse/py-pkglite/actions/workflows/docs.yml/badge.svg)](https://pharmaverse.github.io/py-pkglite/)
 ![License](https://img.shields.io/pypi/l/pkglite)
 
-A simple framework for packing source projects of any language into portable
-text files and restoring them into the original directory structure.
+A simple framework for packing source projects of any programming language into
+portable text files and restoring them into the original directory structure.
 
 Besides the Python API, a command line interface is also provided.
 
