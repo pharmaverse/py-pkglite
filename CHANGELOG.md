@@ -1,5 +1,13 @@
 # Changelog
 
+## py-pkglite (development version)
+
+### Maintenance
+
+- Replace `hatchling` with `uv_build` as the build backend and declare the MIT
+  license using the PEP 639 `license` field to eliminate the `uv build`
+  warning (#64).
+
 ## py-pkglite 0.1.10
 
 ### Documentation
