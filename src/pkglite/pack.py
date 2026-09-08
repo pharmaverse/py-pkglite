@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Protocol
 
 from pathspec import PathSpec
+from pathspec.patterns.gitignore.spec import GitIgnoreSpecPattern
 
 from .classify import classify_file
 from .cli import (
@@ -38,7 +39,8 @@ def load_ignore_matcher(directory: str) -> PathMatcher:
     with open(ignore_path, encoding="utf-8") as f:
         patterns = f.readlines()
 
-    spec = PathSpec.from_lines("gitwildmatch", patterns)
+    # Preserve gitwildmatch semantics, including descendants matched by "dir/*".
+    spec = PathSpec.from_lines(GitIgnoreSpecPattern, patterns)
 
     def matcher(path: str) -> bool:
         """

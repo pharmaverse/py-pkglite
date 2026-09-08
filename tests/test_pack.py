@@ -1,3 +1,5 @@
+import pytest
+
 from pkglite.pack import load_ignore_matcher, pack
 
 
@@ -53,3 +55,27 @@ def test_load_ignore_matcher(tmp_path):
     assert matcher(str(test_dir / "test.pyc")) is True
     assert matcher(str(test_dir / "__pycache__" / "module.py")) is True
     assert matcher(str(test_dir / ".git/")) is False
+
+
+@pytest.mark.filterwarnings("error::DeprecationWarning")
+@pytest.mark.parametrize(
+    ("patterns", "path", "ignored"),
+    [
+        ("build/*\n", "build/nested/output.txt", True),
+        ("build/\n!build/keep.txt\n", "build/keep.txt", False),
+        ("!build/keep.txt\nbuild/\n", "build/keep.txt", True),
+        ("*.pyc\n!keep.pyc\n", "nested/keep.pyc", False),
+        ("/output.txt\n", "output.txt", True),
+        ("/output.txt\n", "nested/output.txt", False),
+        ("cache/\n", "cache", False),
+        ("/\n# comment\n\n", "source.py", False),
+    ],
+)
+def test_load_ignore_matcher_pattern_semantics(tmp_path, patterns, path, ignored):
+    """Preserve wildcard and ordered negation behavior without deprecated APIs."""
+    (tmp_path / ".pkgliteignore").write_text(patterns)
+
+    matcher = load_ignore_matcher(str(tmp_path))
+
+    assert matcher(path) is ignored
+    assert matcher(str(tmp_path / path)) is ignored

@@ -1,5 +1,19 @@
 # Changelog
 
+## py-pkglite (development version)
+
+### Maintenance
+
+- Replace pathspec's deprecated `gitwildmatch` factory with
+  `GitIgnoreSpecPattern`, preserving ignore matching behavior, and require
+  pathspec >= 1.0.0 (#67).
+- Update GitHub Actions workflows to `actions/checkout@v7` and
+  `actions/setup-python@v7` and refresh the disabled Codecov step to
+  `codecov/codecov-action@v7` (#65).
+- Replace `hatchling` with `uv_build` as the build backend and declare the MIT
+  license using the PEP 639 `license` field to eliminate the `uv build`
+  warning (#64).
+
 ## py-pkglite 0.1.10
 
 ### Documentation
